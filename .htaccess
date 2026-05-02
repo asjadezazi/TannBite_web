@@ -1,23 +1,28 @@
-# Remove .html extension from URLs
 RewriteEngine On
-
-# Remove .html extension if present
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteCond %{REQUEST_FILENAME}\.html -f
-RewriteRule ^(.*)\.html$ /$1 [R=301,L]
-
-# Add .html extension internally
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteCond %{REQUEST_FILENAME}\.html -f
-RewriteRule ^(.*)$ $1.html [L]
-
-# Redirect index.html to root
-RewriteCond %{THE_REQUEST} /index\.html[\s?] [NC]
-RewriteRule ^index\.html$ / [R=301,L]
-
-# Prevent directory listing
 Options -Indexes
 
-# Set default page
-DirectoryIndex index.html
+DirectoryIndex index.php
+
+# Canonical URLs without .html (preserve query string)
+RewriteCond %{THE_REQUEST} ^[A-Z]{3,}\s/+([^?\s]*?)\.html [NC]
+RewriteRule .* /%1 [R=301,L,QSA]
+
+RewriteCond %{THE_REQUEST} \s/+index\.php[\s?] [NC]
+RewriteRule ^index\.php$ / [R=301,L]
+
+# Canonical URLs without .php for public pages (keep form endpoint as-is)
+RewriteCond %{THE_REQUEST} ^[A-Z]{3,}\s/+([^?\s]*?)\.php(?:[\s?]|$) [NC]
+RewriteCond %1 !^(index|submit-form)$ [NC]
+RewriteRule .* /%1 [R=301,L,QSA]
+
+# Extensionless routes -> PHP when a matching file exists
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{DOCUMENT_ROOT}/$1.php -f
+RewriteRule ^(.+?)/?$ $1.php [L]
+
+# Legacy: internal rewrite to .html if no .php (e.g. old deploys)
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{DOCUMENT_ROOT}/$1.html -f
+RewriteRule ^(.+?)/?$ $1.html [L]

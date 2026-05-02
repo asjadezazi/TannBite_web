@@ -1,9 +1,9 @@
-# Netlify configuration
+# Static preview config only: Netlify does not execute PHP from this repo.
+# Production should use a PHP host (e.g. Hostinger) with .htaccess routing.
 
 [build]
   publish = "."
 
-# Pretty URLs - removes .html extension
 [[redirects]]
   from = "/index.html"
   to = "/"
@@ -29,67 +29,7 @@
   force = false
 
 [[redirects]]
-  from = "/features"
-  to = "/features.html"
-  status = 200
-  force = false
-
-[[redirects]]
-  from = "/pricing"
-  to = "/pricing.html"
-  status = 200
-  force = false
-
-[[redirects]]
-  from = "/about"
-  to = "/about.html"
-  status = 200
-  force = false
-
-# Netlify configuration
-
-[build]
-  publish = "."
-
-# Pretty URLs - removes .html extension
-[[redirects]]
-  from = "/index.html"
-  to = "/"
+  from = "/thank-you.html"
+  to = "/thank-you"
   status = 301
-  force = false
-
-[[redirects]]
-  from = "/features.html"
-  to = "/features"
-  status = 301
-  force = false
-
-[[redirects]]
-  from = "/pricing.html"
-  to = "/pricing"
-  status = 301
-  force = false
-
-[[redirects]]
-  from = "/about.html"
-  to = "/about"
-  status = 301
-  force = false
-
-[[redirects]]
-  from = "/features"
-  to = "/features.html"
-  status = 200
-  force = false
-
-[[redirects]]
-  from = "/pricing"
-  to = "/pricing.html"
-  status = 200
-  force = false
-
-[[redirects]]
-  from = "/about"
-  to = "/about.html"
-  status = 200
   force = false

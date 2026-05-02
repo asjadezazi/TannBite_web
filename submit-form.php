@@ -48,25 +48,40 @@ if (!empty($errors)) {
 }
 
 $autoloadPath = __DIR__ . '/vendor/autoload.php';
-if (!file_exists($autoloadPath)) {
-    error_log('submit-form.php: Missing vendor/autoload.php for PHPMailer.');
+$phpmailerCore = __DIR__ . '/lib/PHPMailer/PHPMailer.php';
+
+if (is_file($autoloadPath)) {
+    require $autoloadPath;
+} elseif (is_file($phpmailerCore)) {
+    require_once __DIR__ . '/lib/PHPMailer/Exception.php';
+    require_once __DIR__ . '/lib/PHPMailer/PHPMailer.php';
+    require_once __DIR__ . '/lib/PHPMailer/SMTP.php';
+} else {
+    error_log('submit-form.php: PHPMailer missing (install Composer deps or keep lib/PHPMailer/).');
     http_response_code(500);
     echo '<h1>Temporary issue</h1><p>Form is temporarily unavailable. Please try again shortly.</p>';
     exit;
 }
 
-require $autoloadPath;
+$smtpCfg = [];
+$smtpConfigPath = __DIR__ . '/smtp-config.php';
+if (is_file($smtpConfigPath)) {
+    $loaded = require $smtpConfigPath;
+    if (is_array($loaded)) {
+        $smtpCfg = $loaded;
+    }
+}
 
-$smtpHost = getenv('SMTP_HOST') ?: 'smtp.hostinger.com';
-$smtpPort = (int)(getenv('SMTP_PORT') ?: 465);
-$smtpUser = getenv('SMTP_USERNAME') ?: 'contact@tapnbite.com';
-$smtpPass = getenv('SMTP_PASSWORD') ?: '';
-$smtpEncryption = getenv('SMTP_ENCRYPTION') ?: \PHPMailer\PHPMailer\PHPMailer::ENCRYPTION_SMTPS;
+$smtpHost = getenv('SMTP_HOST') ?: ($smtpCfg['host'] ?? 'smtp.hostinger.com');
+$smtpPort = (int)(getenv('SMTP_PORT') ?: ($smtpCfg['port'] ?? 465));
+$smtpUser = getenv('SMTP_USERNAME') ?: ($smtpCfg['username'] ?? 'contact@tapnbite.com');
+$smtpPass = getenv('SMTP_PASSWORD') ?: ($smtpCfg['password'] ?? '');
+$smtpEncryption = getenv('SMTP_ENCRYPTION') ?: ($smtpCfg['encryption'] ?? \PHPMailer\PHPMailer\PHPMailer::ENCRYPTION_SMTPS);
 
-if ($smtpPass === '') {
-    error_log('submit-form.php: SMTP_PASSWORD is missing.');
+if ($smtpPass === '' || $smtpPass === 'YOUR_MAILBOX_PASSWORD') {
+    error_log('submit-form.php: Set SMTP credentials (env SMTP_PASSWORD or smtp-config.php).');
     http_response_code(500);
-    echo '<h1>Temporary issue</h1><p>Form is temporarily unavailable. Please try again shortly.</p>';
+    echo '<h1>Form not configured</h1><p>Please add <code>smtp-config.php</code> on the server (copy from <code>smtp-config.example.php</code>) with your Hostinger mailbox password, or set the <code>SMTP_PASSWORD</code> environment variable.</p>';
     exit;
 }
 

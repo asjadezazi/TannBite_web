@@ -1,251 +1,4 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" href="images/favicon.ico" type="image/x-icon" />
-    <title>Features – Tap N Bite QR Restaurant Ordering</title>
-    <meta
-      name="description"
-      content="Explore Tap N Bite features: QR code table ordering, live order management, menu control, sales analytics, staff permissions, and more."
-    />
-    <meta
-      name="keywords"
-      content="Tap N Bite features, QR code table ordering, restaurant order management, live kitchen display, digital menu management, restaurant sales analytics, staff roles restaurant, inventory restaurant software, flexible order types, eat in takeaway delivery, restaurant dashboard, QR ordering system, table QR codes"
-    />
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            colors: {
-              brand: {
-                50: "#fff7ed",
-                100: "#ffedd5",
-                200: "#fed7aa",
-                300: "#fdba74",
-                400: "#fb923c",
-                500: "#f97316",
-                600: "#ea580c",
-                700: "#c2410c",
-                800: "#9a3412",
-              },
-            },
-            animation: {
-              "fade-in": "fadeIn 0.6s ease-in-out",
-              "slide-up": "slideUp 0.6s ease-out",
-            },
-            keyframes: {
-              fadeIn: {
-                "0%": { opacity: "0" },
-                "100%": { opacity: "1" },
-              },
-              slideUp: {
-                "0%": { transform: "translateY(20px)", opacity: "0" },
-                "100%": { transform: "translateY(0)", opacity: "1" },
-              },
-            },
-          },
-        },
-      };
-    </script>
-  </head>
-  <body class="bg-white text-slate-900 antialiased">
-    <!-- Header -->
-    <header
-      class="sticky top-0 z-40 border-b border-orange-100/70 bg-orange-50/95 backdrop-blur-md"
-    >
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex items-center justify-between h-20">
-          <a href="/" class="flex items-center">
-            <img src="images/logo.png" alt="Tap N Bite" class="h-12 sm:h-14" />
-          </a>
-          <nav class="hidden md:flex items-center gap-8" aria-label="Main">
-            <a href="/features" class="text-sm font-medium text-brand-600"
-              >Features</a
-            >
-            <a
-              href="/pricing"
-              class="text-sm font-medium text-slate-700 hover:text-brand-600 transition-colors"
-              >Pricing</a
-            >
-            <a
-              href="/about"
-              class="text-sm font-medium text-slate-700 hover:text-brand-600 transition-colors"
-              >About</a
-            >
-            <a
-              href="/#contact"
-              class="inline-flex items-center px-5 py-2.5 rounded-full bg-brand-500 text-sm font-semibold text-white shadow-lg shadow-brand-500/30 hover:bg-brand-600 transition-all hover:shadow-xl hover:shadow-brand-500/40"
-            >
-              Get Started
-            </a>
-          </nav>
-          <button
-            type="button"
-            id="nav-toggle"
-            class="inline-flex items-center justify-center rounded-lg p-2.5 text-slate-700 hover:bg-slate-100 hover:text-slate-900 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-offset-2 md:hidden"
-            aria-expanded="false"
-            aria-controls="mobile-nav"
-          >
-            <span class="sr-only">Toggle menu</span>
-            <svg
-              id="nav-icon-open"
-              class="h-6 w-6"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              aria-hidden="true"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M4 6h16M4 12h16M4 18h16"
-              ></path>
-            </svg>
-            <svg
-              id="nav-icon-close"
-              class="hidden h-6 w-6"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              aria-hidden="true"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M6 18L18 6M6 6l12 12"
-              ></path>
-            </svg>
-          </button>
-        </div>
-      </div>
-    </header>
-    <div
-      id="mobile-nav"
-      class="fixed inset-0 z-50 pointer-events-none md:hidden"
-      aria-hidden="true"
-    >
-      <div
-        id="mobile-nav-backdrop"
-        class="absolute inset-0 bg-slate-900/45 opacity-0 transition-opacity duration-300 ease-out"
-      ></div>
-      <div
-        id="mobile-nav-panel"
-        class="absolute inset-0 -translate-x-full bg-gradient-to-br from-orange-50 via-white to-red-50 transition-transform duration-300 ease-out"
-      >
-        <button
-          type="button"
-          id="mobile-nav-close"
-          class="absolute right-5 top-5 inline-flex items-center justify-center rounded-xl border-2 border-brand-500/80 bg-orange-50/90 p-2.5 text-slate-700 hover:bg-orange-100 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-offset-2"
-          aria-label="Close menu"
-        >
-          <svg
-            class="h-6 w-6"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            aria-hidden="true"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M6 18L18 6M6 6l12 12"
-            ></path>
-          </svg>
-        </button>
-        <div class="flex h-full flex-col px-6 pb-8 pt-6 sm:px-8">
-          <a href="/" class="inline-flex items-center pr-16">
-            <img src="images/logo.png" alt="Tap N Bite" class="h-11" />
-          </a>
-          <nav class="mt-8 flex flex-col gap-2" aria-label="Mobile">
-            <a
-              href="/features"
-              class="rounded-xl px-4 py-3 text-lg font-semibold text-brand-600 hover:bg-orange-100/60"
-              >Features</a
-            >
-            <a
-              href="/pricing"
-              class="rounded-xl px-4 py-3 text-lg font-semibold text-slate-700 hover:bg-orange-100/60 hover:text-brand-600"
-              >Pricing</a
-            >
-            <a
-              href="/about"
-              class="rounded-xl px-4 py-3 text-lg font-semibold text-slate-700 hover:bg-orange-100/60 hover:text-brand-600"
-              >About</a
-            >
-          </nav>
-          <a
-            href="/#contact"
-            class="mt-auto inline-flex items-center justify-center rounded-full bg-brand-500 px-6 py-3 text-base font-semibold text-white shadow-lg shadow-brand-500/30 hover:bg-brand-600"
-          >
-            Get Started
-          </a>
-        </div>
-      </div>
-    </div>
-    <script>
-      (function () {
-        var btn = document.getElementById("nav-toggle");
-        var menu = document.getElementById("mobile-nav");
-        var backdrop = document.getElementById("mobile-nav-backdrop");
-        var panel = document.getElementById("mobile-nav-panel");
-        var closeBtn = document.getElementById("mobile-nav-close");
-        var openIcon = document.getElementById("nav-icon-open");
-        var closeIcon = document.getElementById("nav-icon-close");
-        if (
-          !btn ||
-          !menu ||
-          !backdrop ||
-          !panel ||
-          !closeBtn ||
-          !openIcon ||
-          !closeIcon
-        )
-          return;
-        function setOpen(open) {
-          menu.classList.toggle("pointer-events-none", !open);
-          menu.setAttribute("aria-hidden", String(!open));
-          backdrop.classList.toggle("opacity-0", !open);
-          backdrop.classList.toggle("opacity-100", open);
-          panel.classList.toggle("-translate-x-full", !open);
-          panel.classList.toggle("translate-x-0", open);
-          btn.setAttribute("aria-expanded", String(open));
-          openIcon.classList.toggle("hidden", open);
-          closeIcon.classList.toggle("hidden", !open);
-          document.body.classList.toggle("overflow-hidden", open);
-        }
-        btn.addEventListener("click", function () {
-          setOpen(menu.classList.contains("pointer-events-none"));
-        });
-        closeBtn.addEventListener("click", function () {
-          setOpen(false);
-        });
-        backdrop.addEventListener("click", function () {
-          setOpen(false);
-        });
-        menu.querySelectorAll("a").forEach(function (link) {
-          link.addEventListener("click", function () {
-            setOpen(false);
-          });
-        });
-        document.addEventListener("keydown", function (e) {
-          if (
-            e.key === "Escape" &&
-            !menu.classList.contains("pointer-events-none")
-          )
-            setOpen(false);
-        });
-        window.addEventListener("resize", function () {
-          if (window.matchMedia("(min-width: 768px)").matches) setOpen(false);
-        });
-      })();
-    </script>
-
-    <main>
+<main>
       <!-- Page Hero -->
       <section
         class="bg-gradient-to-br from-orange-50 via-white to-red-50 pt-20 pb-16"
@@ -368,7 +121,7 @@
                 class="relative rounded-2xl overflow-hidden shadow-2xl border-8 border-white"
               >
                 <img
-                  src="images/qr-dashboard.png"
+                  src="/images/qr-dashboard.png"
                   alt="QR Code Ordering"
                   class="w-full h-auto"
                 />
@@ -386,7 +139,7 @@
                 class="relative rounded-2xl overflow-hidden shadow-2xl border-8 border-white"
               >
                 <img
-                  src="images/flexible-order.png"
+                  src="/images/flexible-order.png"
                   alt="Flexible Order Types"
                   class="w-full h-auto"
                 />
@@ -583,7 +336,7 @@
                 class="relative rounded-2xl overflow-hidden shadow-2xl border-8 border-white"
               >
                 <img
-                  src="images/liveOrder-dashboard.png"
+                  src="/images/liveOrder-dashboard.png"
                   alt="Live Order Management"
                   class="w-full h-auto"
                 />
@@ -601,7 +354,7 @@
                 class="relative rounded-2xl overflow-hidden shadow-2xl border-8 border-white"
               >
                 <img
-                  src="images/menue-dahboard.png"
+                  src="/images/menue-dahboard.png"
                   alt="Menu Management"
                   class="w-full h-auto"
                 />
@@ -799,7 +552,7 @@
                 class="relative rounded-2xl overflow-hidden shadow-2xl border-8 border-white"
               >
                 <img
-                  src="images/revenue-dashborad.png"
+                  src="/images/revenue-dashborad.png"
                   alt="Sales Analytics"
                   class="w-full h-auto"
                 />
@@ -817,7 +570,7 @@
                 class="relative rounded-2xl overflow-hidden shadow-2xl border-8 border-white"
               >
                 <img
-                  src="images/staff-dashboard.png"
+                  src="/images/staff-dashboard.png"
                   alt="Staff Management"
                   class="w-full h-auto"
                 />
@@ -923,7 +676,7 @@
                 class="relative rounded-2xl overflow-hidden shadow-2xl border-8 border-white"
               >
                 <img
-                  src="images/kds.png"
+                  src="/images/kds.png"
                   alt="Kitchen Display System"
                   class="w-full h-auto"
                 />
@@ -1047,7 +800,7 @@
               class="rounded-2xl overflow-hidden shadow-2xl border-8 border-white"
             >
               <img
-                src="images/inventory-ui.png"
+                src="/images/inventory-ui.png"
                 alt="Inventory Module"
                 class="w-full h-auto"
               />
@@ -1079,119 +832,3 @@
         </div>
       </section>
     </main>
-
-    <!-- Footer -->
-    <footer class="bg-slate-900 text-white py-12">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="grid md:grid-cols-3 gap-8 mb-8">
-          <div>
-            <img
-              src="images/logo.png"
-              alt="Tap N Bite"
-              class="h-12 mb-4 brightness-0 invert"
-            />
-            <p class="text-slate-400 text-sm">
-              Transform your restaurant with smart QR ordering. Free forever.
-            </p>
-            <div class="mt-6">
-              <p
-                class="text-xs font-semibold uppercase tracking-wide text-slate-500 mb-3"
-              >
-                Follow us
-              </p>
-              <div class="flex flex-wrap items-center gap-2">
-                <a
-                  href="https://www.instagram.com/tapn_bite?igsh=YXB5aXl6bHEyZnEw&utm_source=qr"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-slate-800 text-slate-300 transition-colors hover:bg-brand-600 hover:text-white"
-                  aria-label="Tap N Bite on Instagram"
-                >
-                  <svg
-                    class="h-5 w-5"
-                    fill="currentColor"
-                    viewBox="0 0 24 24"
-                    aria-hidden="true"
-                  >
-                    <path
-                      d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"
-                    />
-                  </svg>
-                </a>
-              </div>
-            </div>
-          </div>
-          <div>
-            <h3 class="font-semibold mb-4">Quick Links</h3>
-            <ul class="space-y-2">
-              <li>
-                <a
-                  href="/features"
-                  class="text-slate-400 hover:text-white transition-colors"
-                  >Features</a
-                >
-              </li>
-              <li>
-                <a
-                  href="/pricing"
-                  class="text-slate-400 hover:text-white transition-colors"
-                  >Pricing</a
-                >
-              </li>
-              <li>
-                <a
-                  href="/about"
-                  class="text-slate-400 hover:text-white transition-colors"
-                  >About</a
-                >
-              </li>
-            </ul>
-          </div>
-          <div>
-            <h3 class="font-semibold mb-4">Contact</h3>
-            <ul class="space-y-2 text-slate-400 text-sm">
-              <li>Contact@tapnbite.com</li>
-              <li>+919149098757</li>
-            </ul>
-          </div>
-        </div>
-        <div
-          class="border-t border-slate-800 pt-8 text-center text-sm text-slate-400"
-        >
-          <p>© 2026 Tap N Bite. All rights reserved.</p>
-        </div>
-      </div>
-    </footer>
-
-    <script>
-      // Scroll animations
-      const observerOptions = {
-        threshold: 0.02,
-        rootMargin: "0px 0px 12% 0px",
-      };
-
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.style.opacity = "1";
-            entry.target.style.transform = "translateY(0)";
-            observer.unobserve(entry.target);
-          }
-        });
-      }, observerOptions);
-
-      document.addEventListener("DOMContentLoaded", () => {
-        const animateElements = document.querySelectorAll(
-          "section > div, .grid > div",
-        );
-        animateElements.forEach((el, index) => {
-          el.style.opacity = "0";
-          el.style.transform = "translateY(12px)";
-          const delay = Math.min(index * 0.035, 0.18);
-          el.style.transition = `opacity 0.35s ease-out ${delay}s, transform 0.35s ease-out ${delay}s`;
-          observer.observe(el);
-        });
-      });
-    </script>
-  </body>
-</html>
